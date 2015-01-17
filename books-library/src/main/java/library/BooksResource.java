@@ -164,6 +164,7 @@ public class BooksResource {
 	 *            Book instance
 	 */
 	private void ValidateBook(String isbn, Book book) {
+
 		// Check if parameter ISBN matches the book ISBN.
 		if (isbn != book.getIsbn()) {
 			throw new ConstraintViolationException(
@@ -172,6 +173,8 @@ public class BooksResource {
 
 		validator.validate(book);
 		Set<ConstraintViolation<Book>> errors = validator.validate(book);
-		throw new ConstraintViolationException(errors);
+		if (errors.size() > 0) {
+			throw new ConstraintViolationException(errors);
+		}
 	}
 }
