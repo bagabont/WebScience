@@ -2,6 +2,7 @@ package library;
 
 import java.util.List;
 import java.util.Set;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -83,8 +84,9 @@ public class BooksResource {
 	@POST
 	@Path("/{isbn}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response createBook(@PathParam("isbn") String isbn, @Valid Book book) {
+	public Response createBook(@PathParam("isbn") String isbn, Book book) {
 
+		System.out.println("hey");
 		try {
 			// Validate input JSON
 			ValidateBook(isbn, book);
@@ -164,16 +166,21 @@ public class BooksResource {
 	 *            Book instance
 	 */
 	private void ValidateBook(String isbn, Book book) {
+
+		if (book == null) {
+			throw new ConstraintViolationException("Book data is null", null);
+		}
+		validator.validate(book);
+		Set<ConstraintViolation<Book>> errors = validator.validate(book);
+		if (errors.size() > 0) {
+			throw new ConstraintViolationException(errors);
+		}
+
 		// Check if parameter ISBN matches the book ISBN.
 		if (!isbn.equals(book.getIsbn())) {
 			throw new ConstraintViolationException(
 					"ISBN does not match book's ISBN.", null);
 		}
 
-		validator.validate(book);
-		Set<ConstraintViolation<Book>> errors = validator.validate(book);
-		if (errors.size() > 0) {
-			throw new ConstraintViolationException(errors);
-		}
 	}
 }
