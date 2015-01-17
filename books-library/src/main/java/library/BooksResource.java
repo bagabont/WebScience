@@ -86,7 +86,6 @@ public class BooksResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response createBook(@PathParam("isbn") String isbn, Book book) {
 
-		System.out.println("hey");
 		try {
 			// Validate input JSON
 			ValidateBook(isbn, book);
