@@ -29,19 +29,11 @@ public interface IBooksDao {
 	void remove(String isbn);
 
 	/**
-	 * Inserts a new book
+	 * Inserts a book
 	 * 
 	 * @param book
-	 *            book to be inserted
+	 *            Book instance
+	 * @return Book which was replaced or null if newly created
 	 */
-	void insert(Book book);
-
-	/**
-	 * Updates a book.
-	 * 
-	 * @param book
-	 *            book to be replaced
-	 * @return the previous book associated with the specified ISBN
-	 */
-	Book replace(Book book);
+	Book insert(Book book);
 }

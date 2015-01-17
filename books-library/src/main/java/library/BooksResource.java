@@ -118,7 +118,7 @@ public class BooksResource {
 
 			// Update the book and set the status code, depending on if the
 			// book is newly inserted or actually updated.
-			Status status = dao.replace(book) != null ? Status.CREATED
+			Status status = dao.insert(book) == null ? Status.CREATED
 					: Status.OK;
 
 			// Return successful result
@@ -164,9 +164,8 @@ public class BooksResource {
 	 *            Book instance
 	 */
 	private void ValidateBook(String isbn, Book book) {
-
 		// Check if parameter ISBN matches the book ISBN.
-		if (isbn != book.getIsbn()) {
+		if (!isbn.equals(book.getIsbn())) {
 			throw new ConstraintViolationException(
 					"ISBN does not match book's ISBN.", null);
 		}

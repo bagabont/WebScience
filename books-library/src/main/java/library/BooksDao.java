@@ -52,23 +52,13 @@ public enum BooksDao implements IBooksDao {
 	}
 
 	/**
-	 * Inserts a new book
+	 * Inserts a book
 	 * 
 	 * @param book
-	 *            book to be inserted
+	 *            Book instance
+	 * @return Book which was replaced or null if newly created
 	 */
-	public void insert(Book book) {
-		contentProvider.put(book.getIsbn(), book);
-	}
-
-	/**
-	 * Updates a book.
-	 * 
-	 * @param book
-	 *            book to be replaced
-	 * @return the previous book associated with the specified ISBN
-	 */
-	public Book replace(Book book) {
-		return contentProvider.replace(book.getIsbn(), book);
+	public Book insert(Book book) {
+		return contentProvider.put(book.getIsbn(), book);
 	}
 }
