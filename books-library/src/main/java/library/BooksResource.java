@@ -1,10 +1,8 @@
 package library;
 
-import java.awt.event.ItemEvent;
-import java.util.Iterator;
+
 import java.util.List;
 import java.util.Set;
-
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
