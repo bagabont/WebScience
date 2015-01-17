@@ -10,6 +10,7 @@
 		<param-name>resteasy.scan</param-name>
 		<param-value>true</param-value>
 	</context-param>
+	<!-- Value must be the same as in the mapping -->
 	<context-param>
 		<param-name>resteasy.servlet.mapping.prefix</param-name>
 		<param-value>/api</param-value>

@@ -14,6 +14,8 @@ public enum BooksDao implements IBooksDao {
 	private HashMap<String, Book> contentProvider = new HashMap<String, Book>();
 
 	BooksDao() {
+		
+		// Initialize mock up data
 		Book book = new Book("123456781", "Harry Potter", "Joan R.");
 		contentProvider.put(book.getIsbn(), book);
 
@@ -22,7 +24,6 @@ public enum BooksDao implements IBooksDao {
 
 		book = new Book("123456783", "Some old book", "Ekaterina II");
 		contentProvider.put(book.getIsbn(), book);
-
 	}
 
 	/**
@@ -31,6 +32,7 @@ public enum BooksDao implements IBooksDao {
 	 * @return List of books
 	 */
 	public List<Book> getAll() {
+		// Cast books from collection to list
 		List<Book> books = new ArrayList<Book>();
 		books.addAll(contentProvider.values());
 		return books;
@@ -44,6 +46,7 @@ public enum BooksDao implements IBooksDao {
 	 * @return the book to which the specified ISBN is mapped
 	 */
 	public Book find(String isbn) {
+		// Search in the map for a book with this ISBN
 		return contentProvider.get(isbn);
 	}
 
@@ -54,6 +57,7 @@ public enum BooksDao implements IBooksDao {
 	 *            of the book to be removed
 	 */
 	public void remove(String isbn) {
+		// Remove the book from the map
 		contentProvider.remove(isbn);
 	}
 
@@ -65,6 +69,7 @@ public enum BooksDao implements IBooksDao {
 	 * @return Book which was replaced or null if newly created
 	 */
 	public Book insert(Book book) {
+		// Add new book to the map
 		return contentProvider.put(book.getIsbn(), book);
 	}
 }

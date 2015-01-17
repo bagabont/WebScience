@@ -1,6 +1,5 @@
 package library;
 
-
 import java.util.List;
 import java.util.Set;
 import javax.ws.rs.Consumes;
@@ -20,10 +19,17 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ConstraintViolation;
 
+/**
+ * Provides RESTful access to manage book in the library.
+ *
+ */
 @Path("/books")
 public class BooksResource {
 
-	IBooksDao dao = BooksDao.instance;
+	// Data Access Object instance
+	static IBooksDao dao = BooksDao.instance;
+
+	// Validator instance.
 	static Validator validator = Validation.buildDefaultValidatorFactory()
 			.getValidator();
 
@@ -191,6 +197,5 @@ public class BooksResource {
 			throw new ConstraintViolationException(
 					"ISBN key does not match book's ISBN value.", null);
 		}
-
 	}
 }
