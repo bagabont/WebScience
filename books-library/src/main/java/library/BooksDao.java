@@ -14,9 +14,15 @@ public enum BooksDao implements IBooksDao {
 	private HashMap<String, Book> contentProvider = new HashMap<String, Book>();
 
 	BooksDao() {
-		contentProvider.put("1", new Book("1", "One", "Author 1"));
-		contentProvider.put("2", new Book("2", "Two", "Author 2"));
-		contentProvider.put("3", new Book("3", "Three", "Author 3"));
+		Book book = new Book("123456781", "Harry Potter", "Joan R.");
+		contentProvider.put(book.getIsbn(), book);
+
+		book = new Book("123456782", "Code Complete", "Pesho G.");
+		contentProvider.put(book.getIsbn(), book);
+
+		book = new Book("123456783", "Some old book", "Ekaterina II");
+		contentProvider.put(book.getIsbn(), book);
+
 	}
 
 	/**

@@ -1,20 +1,16 @@
 package library;
 
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class Book {
 
-	@NotNull
-	@Size(min = 1, max = 50)
+	@Size(min = 1, max = 50, message = "Author is invalid.")
 	private String author;
 
-	@NotNull
-	@Size(min = 1, max = 200)
+	@Size(min = 1, max = 200, message = "Title is invalid.")
 	private String title;
 
-	@NotNull
-	@Size(min = 9, max = 13)
+	@Size(min = 9, max = 13, message = "ISBN is invalid.")
 	private String isbn;
 
 	public Book(String isbn, String title, String author) {

@@ -1,5 +1,7 @@
 package library;
 
+import java.awt.event.ItemEvent;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -95,8 +97,10 @@ public class BooksResource {
 			return Response.status(Status.CREATED).build();
 
 		} catch (ConstraintViolationException e) {
+
 			// Return Bad Request
-			return Response.status(Status.BAD_REQUEST).build();
+			return Response.status(Status.BAD_REQUEST).entity(e.getMessage())
+					.build();
 		}
 	}
 
@@ -127,7 +131,8 @@ public class BooksResource {
 
 		} catch (ConstraintViolationException e) {
 			// Return Bad Request
-			return Response.status(Status.BAD_REQUEST).build();
+			return Response.status(Status.BAD_REQUEST).entity(e.getMessage())
+					.build();
 		}
 	}
 
@@ -172,13 +177,21 @@ public class BooksResource {
 		validator.validate(book);
 		Set<ConstraintViolation<Book>> errors = validator.validate(book);
 		if (errors.size() > 0) {
-			throw new ConstraintViolationException(errors);
+
+			StringBuilder builder = new StringBuilder();
+			for (ConstraintViolation<Book> error : errors) {
+				builder.append(error.getMessage());
+				builder.append('\n');
+			}
+
+			throw new ConstraintViolationException(builder.toString().trim(),
+					errors);
 		}
 
-		// Check if parameter ISBN matches the book ISBN.
+		// Check if parameter ISBN matches the book ISBN value.
 		if (!isbn.equals(book.getIsbn())) {
 			throw new ConstraintViolationException(
-					"ISBN does not match book's ISBN.", null);
+					"ISBN key does not match book's ISBN value.", null);
 		}
 
 	}
